@@ -17,30 +17,65 @@ describe('Consumer Test', () => {
         logLevel: "INFO"
     });
 
-    before(() => provider.setup()
-    .then(() => provider.addInteraction({
-        state: "user token",
-        uponReceiving: "GET user token",
-        withRequest: {
-            method: "GET",
-            path: "/token/1234",
-            headers: { Accept: "application/json, text/plain, */*" }
-        },
-        willRespondWith: {
-            headers: { "Content-Type": "application/json" },
-            status: 200,
-            body: { "token": string("bearer") }
-        }
-    })));
+    before(() => provider.setup())
 
-    it('OK response', () => {
-        get()
-        .then((response) => {
-            expect(response.statusText).to.be.equal('OK')
+    describe('valid token', () => {
+        before(done => { provider.addInteraction({
+            state: "user token",
+            uponReceiving: "GET user token",
+            withRequest: {
+                method: "GET",
+                path: "/token/1234",
+                headers: { Accept: "application/json, text/plain, */*" }
+            },
+            willRespondWith: {
+                headers: { "Content-Type": "application/json" },
+                status: 200,
+                body: { "token": string("bearer") }
+            }
+        }).then(() => {
+            done()
         })
-    });
+        })
 
-    afterEach(() => provider.verify());
+        it('OK response', () => {
+            get()
+                .then((response) => {
+                    expect(response.status).to.be.equal(200)
+                })
+        })
 
-    after(() => provider.finalize());
+    })
+
+    describe('invalid token', () => {
+        before(done => {
+            provider.addInteraction({
+                state: "user token",
+                uponReceiving: "GET invalid user token",
+                withRequest: {
+                    method: "GET",
+                    path: "/token/null",
+                    headers: { Accept: "application/json, text/plain, */*" }
+                },
+                willRespondWith: {
+                    headers: { "Content-Type": "application/json" },
+                    status: 400,
+                    body: { "error": "token must be a string" }
+                }
+            }).then(() => {
+                done()
+            })
+        })
+
+        it('BAD response', () => {
+            getNull()
+                .then((response) => {
+                    expect(response.status).to.be.equal(400)
+                })
+        })
+    })
+
+    afterEach(() => provider.verify())
+
+    after(() => provider.finalize())
 })

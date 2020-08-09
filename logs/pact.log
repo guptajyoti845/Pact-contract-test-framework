@@ -1,5 +1,5 @@
-I, [2020-08-09T21:38:48.374475 #11191]  INFO -- : Registered expected interaction GET /token/1234
-D, [2020-08-09T21:38:48.375495 #11191] DEBUG -- : {
+I, [2020-08-09T22:00:30.412097 #12663]  INFO -- : Registered expected interaction GET /token/1234
+D, [2020-08-09T22:00:30.412333 #12663] DEBUG -- : {
   "description": "GET user token",
   "providerState": "user token",
   "request": {
@@ -23,8 +23,17 @@ D, [2020-08-09T21:38:48.375495 #11191] DEBUG -- : {
   },
   "metadata": null
 }
-I, [2020-08-09T21:38:48.394327 #11191]  INFO -- : Received request GET /token/1234
-D, [2020-08-09T21:38:48.394854 #11191] DEBUG -- : {
+W, [2020-08-09T22:00:30.422014 #12663]  WARN -- : Verifying - actual interactions do not match expected interactions. 
+Missing requests:
+	GET /token/1234
+
+
+W, [2020-08-09T22:00:30.422062 #12663]  WARN -- : Missing requests:
+	GET /token/1234
+
+
+I, [2020-08-09T22:00:30.423457 #12663]  INFO -- : Received request GET /token/1234
+D, [2020-08-09T22:00:30.423537 #12663] DEBUG -- : {
   "path": "/token/1234",
   "query": "",
   "method": "get",
@@ -36,8 +45,8 @@ D, [2020-08-09T21:38:48.394854 #11191] DEBUG -- : {
     "Version": "HTTP/1.1"
   }
 }
-I, [2020-08-09T21:38:48.395546 #11191]  INFO -- : Found matching response for GET /token/1234
-D, [2020-08-09T21:38:48.395720 #11191] DEBUG -- : {
+I, [2020-08-09T22:00:30.423800 #12663]  INFO -- : Found matching response for GET /token/1234
+D, [2020-08-09T22:00:30.423893 #12663] DEBUG -- : {
   "status": 200,
   "headers": {
     "Content-Type": "application/json"
@@ -49,6 +58,5 @@ D, [2020-08-09T21:38:48.395720 #11191] DEBUG -- : {
     }
   }
 }
-I, [2020-08-09T21:38:48.399007 #11191]  INFO -- : Verifying - interactions matched
-I, [2020-08-09T21:38:48.417028 #11191]  INFO -- : Cleared interactions
-I, [2020-08-09T21:38:48.425093 #11191]  INFO -- : Writing pact for token to /Users/jyoti.gupta/pers_git/pact-online-course/pacts/react-token.json
+I, [2020-08-09T22:00:30.430733 #12663]  INFO -- : Cleared interactions
+I, [2020-08-09T22:00:30.438310 #12663]  INFO -- : Writing pact for token to /Users/jyoti.gupta/pers_git/pact-online-course/pacts/react-token.json
